@@ -1,0 +1,20 @@
+language: go
+
+install:
+  - go get github.com/mattn/goveralls
+  - go get gopkg.in/webnice/debug.v1
+  - go get gopkg.in/webnice/log.v2
+  - go get gopkg.in/webnice/transport.v2
+  - go get gopkg.in/webnice/lsf.v1/lsf
+
+script:
+  - make test
+  - GOPATH=`pwd` GO111MODULE="off" $HOME/gopath/bin/goveralls -coverprofile=coverage.log -service=travis-ci -repotoken $COVERALLS_TOKEN
+
+go:
+  - "1.8.x"
+  - "1.9.x"
+  - "1.10.x"
+  - "1.11.x"
+  - "1.12.x"
+  - master
